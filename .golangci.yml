@@ -1,0 +1,14 @@
+version: "2"
+
+linters: 'standard'
+
+cyclop:
+  max-complexity: 10
+
+decorder:
+  dec-order:
+    - type
+    - const
+    - var
+    - func
+
