@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -164,6 +165,28 @@ func wordCount(s string) map[string]int {
 	return counts
 }
 
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func functions() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+
+	fmt.Println(hypot(5, 12))
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+
+func closures() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
 func main() {
 	// pointers()
 	// structs()
@@ -174,4 +197,9 @@ func main() {
 	// ranges()
 	maps()
 	fmt.Println(wordCount("a skunk sat on a stump. the skunk said the stump stunk. the stump said the skunk stunk. therefore they both stunk."))
+	functions()
+	pos, neg := closures(), closures()
+	for i := 0; i < 10; i++ {
+		fmt.Println(pos(i), neg(-2*i))
+	}
 }
